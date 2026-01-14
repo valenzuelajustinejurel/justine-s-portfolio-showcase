@@ -58,10 +58,10 @@ export const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="group p-6 rounded-xl bg-card border border-border hover:border-primary/30 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              className="group p-6 rounded-xl bg-card border border-border hover:border-primary/20 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center mb-5">
-                <service.icon className="h-6 w-6 text-primary" strokeWidth={1.5} />
+              <div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center mb-5">
+                <service.icon className="h-6 w-6 text-muted-foreground group-hover:text-primary transition-colors duration-200" strokeWidth={1.5} />
               </div>
               <h3 className="text-lg font-heading font-medium text-foreground mb-3">
                 {service.title}

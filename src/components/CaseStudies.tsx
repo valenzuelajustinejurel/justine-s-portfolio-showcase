@@ -117,7 +117,7 @@ export const CaseStudies = () => {
   const isDetailsOpen = expandedId === activeStudy?.id;
 
   return (
-    <section id="case-studies" className="py-32 px-6 bg-muted/30 overflow-x-hidden">
+    <section id="case-studies" className="py-32 px-6 bg-secondary/50 overflow-x-hidden">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -165,10 +165,10 @@ export const CaseStudies = () => {
                     <div
                       onClick={() => api?.scrollTo(index)}
                       className={
-                        "bg-card border rounded-2xl overflow-hidden h-full shadow-sm transition-shadow duration-300 cursor-pointer " +
+                        "bg-card border rounded-2xl overflow-hidden h-full transition-all duration-300 cursor-pointer " +
                         (isActive
-                          ? "border-primary/20 shadow-xl"
-                          : "border-border shadow-md")
+                          ? "border-primary/30 shadow-2xl"
+                          : "border-border shadow-lg")
                       }
                     >
                       <div
@@ -177,7 +177,7 @@ export const CaseStudies = () => {
                           (isActive ? "hover:bg-muted/20" : "")
                         }
                       >
-                        <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-accent flex items-center justify-center">
+                        <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-secondary flex items-center justify-center">
                           <study.icon
                             className="h-5 w-5 text-primary"
                             strokeWidth={1.5}
@@ -318,7 +318,7 @@ export const CaseStudies = () => {
                       </ul>
                     </div>
 
-                    <div className="p-5 rounded-xl bg-accent/30 border border-accent/50">
+                    <div className="p-5 rounded-xl bg-secondary border border-border">
                       <h4 className="text-sm font-medium text-foreground mb-3">
                         {activeStudy.type === "Website" ? "Result" : "Impact"}
                       </h4>
