@@ -5,7 +5,8 @@ export const Hero = () => {
   return (
     <section className="min-h-[90vh] flex items-center px-6 pt-28 pb-20">
       <div className="max-w-5xl mx-auto w-full">
-        <div className="grid lg:grid-cols-[auto_auto_1fr] gap-8 lg:gap-12 items-center">
+        {/* Two-column layout: Image + Text */}
+        <div className="grid lg:grid-cols-[auto_1fr] gap-10 lg:gap-16 items-center mb-12">
           {/* Profile Image - Left Column */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -24,26 +25,6 @@ export const Hero = () => {
               {/* Subtle decorative shadow */}
               <div className="absolute -inset-1 bg-primary/5 rounded-2xl -z-10 blur-xl" />
             </div>
-          </motion.div>
-
-          {/* Buttons - Middle Column (Bridge) */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            className="flex flex-row lg:flex-col gap-4 justify-center"
-          >
-            <Button asChild size="lg" className="px-6 py-6 text-base font-medium shadow-md hover:shadow-lg transition-shadow">
-              <a href="#contact">Work With Me</a>
-            </Button>
-            <Button 
-              asChild 
-              variant="outline" 
-              size="lg" 
-              className="px-6 py-6 text-base font-normal text-muted-foreground hover:text-foreground border-border/60 hover:border-primary/30"
-            >
-              <a href="#case-studies">View My Work</a>
-            </Button>
           </motion.div>
 
           {/* Text Content - Right Column */}
@@ -66,6 +47,26 @@ export const Hero = () => {
             </p>
           </motion.div>
         </div>
+
+        {/* Buttons - Below Image and Text */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
+          className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+        >
+          <Button asChild size="lg" className="px-8 py-6 text-base font-medium shadow-md hover:shadow-lg transition-shadow">
+            <a href="#contact">Work With Me</a>
+          </Button>
+          <Button 
+            asChild 
+            variant="outline" 
+            size="lg" 
+            className="px-8 py-6 text-base font-normal text-muted-foreground hover:text-foreground border-border/60 hover:border-primary/30"
+          >
+            <a href="#case-studies">View My Work</a>
+          </Button>
+        </motion.div>
 
         {/* Scroll indicator */}
         <motion.div
