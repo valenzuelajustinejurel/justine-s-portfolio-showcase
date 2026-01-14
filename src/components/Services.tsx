@@ -28,43 +28,48 @@ const services = [
   },
   {
     icon: Link,
-    title: "Slack, Asana, and Google Sheets integrations",
+    title: "Workflow automation & integrations (Slack, Asana, Google Sheets, and more)",
   },
 ];
 
 export const Services = () => {
   return (
     <section id="services" className="py-24 px-6">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-12"
+          className="mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-heading text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-heading text-foreground">
             What I Do
           </h2>
+          <div className="w-16 h-0.5 bg-primary mt-4" />
         </motion.div>
 
-        <ul className="space-y-4">
+        <div className="grid md:grid-cols-2 gap-4">
           {services.map((service, index) => (
-            <motion.li
+            <motion.div
               key={service.title}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.08 }}
-              className="flex items-start gap-4 group"
+              className="group relative p-6 rounded-xl bg-card border border-border/50 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
             >
-              <service.icon className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-              <span className="text-foreground/90 text-lg">
-                {service.title}
-              </span>
-            </motion.li>
+              <div className="flex items-start gap-4">
+                <div className="p-2.5 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+                  <service.icon className="h-5 w-5" />
+                </div>
+                <p className="text-foreground/90 text-base leading-relaxed pt-1">
+                  {service.title}
+                </p>
+              </div>
+            </motion.div>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );
