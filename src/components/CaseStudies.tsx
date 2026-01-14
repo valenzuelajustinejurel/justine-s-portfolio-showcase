@@ -138,7 +138,7 @@ export const CaseStudies = () => {
         {/* Center-Focused Carousel */}
         <div 
           ref={containerRef}
-          className="relative h-[320px] md:h-[280px] flex items-start justify-center"
+          className="relative min-h-[320px] md:min-h-[280px] flex items-start justify-center"
         >
           <motion.div
             className="relative w-full flex justify-center"
