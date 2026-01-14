@@ -22,7 +22,7 @@ export const Contact = () => {
 
           <div className="flex justify-center mb-14">
             <Button asChild size="lg" className="px-8 py-6 text-base font-medium">
-              <a href="mailto:justine.valenzuela@email.com">
+              <a href="mailto:valenzuela.justinejurel@gmail.com">
                 <Mail className="h-4 w-4 mr-2" strokeWidth={1.5} />
                 Send an Email
               </a>
@@ -31,20 +31,12 @@ export const Contact = () => {
 
           <div className="flex flex-wrap justify-center gap-8 text-sm">
             <a
-              href="https://www.onlinejobs.ph/"
+              href="https://www.onlinejobs.ph/jobseekers/info/1832110"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors duration-200"
             >
               OnlineJobs.ph
-            </a>
-            <a
-              href="https://github.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors duration-200"
-            >
-              GitHub
             </a>
           </div>
         </motion.div>
