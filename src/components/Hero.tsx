@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-
+import profilePhoto from "@/assets/profile-photo.jpg";
 export const Hero = () => {
   return (
     <section className="min-h-[90vh] flex items-center px-6 pt-28 pb-20">
@@ -16,15 +16,15 @@ export const Hero = () => {
             className="flex justify-center"
           >
             <div className="relative">
-              <div className="w-56 h-64 sm:w-64 sm:h-72 lg:w-72 lg:h-80 rounded-2xl overflow-hidden shadow-xl bg-card border border-border/50">
+              <div className="w-56 h-64 sm:w-64 sm:h-72 lg:w-72 lg:h-80 rounded-2xl overflow-hidden shadow-2xl bg-card border border-border">
                 <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face"
+                  src={profilePhoto}
                   alt="Justine Valenzuela"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
               {/* Subtle decorative shadow */}
-              <div className="absolute -inset-1 bg-primary/5 rounded-2xl -z-10 blur-xl" />
+              <div className="absolute -inset-2 bg-primary/10 rounded-2xl -z-10 blur-2xl" />
             </div>
           </motion.div>
 
