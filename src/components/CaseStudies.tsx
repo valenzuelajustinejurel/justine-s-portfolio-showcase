@@ -173,23 +173,13 @@ export const CaseStudies = () => {
                     >
                       <div
                         className={
-                          "w-full p-6 md:p-8 flex flex-col items-start gap-4 text-left transition-colors duration-200 " +
+                          "w-full p-6 md:p-8 flex flex-col items-center gap-4 text-center transition-colors duration-200 " +
                           (isActive ? "hover:bg-muted/20" : "")
                         }
                       >
-                        <div className="flex items-center justify-between w-full">
-                          <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-accent flex items-center justify-center">
-                            <study.icon
-                              className="h-5 w-5 text-primary"
-                              strokeWidth={1.5}
-                            />
-                          </div>
-
-                          <ChevronDown
-                            className={
-                              "h-5 w-5 text-muted-foreground transition-transform duration-200 " +
-                              (isActive && isExpanded ? "rotate-180" : "")
-                            }
+                        <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-accent flex items-center justify-center">
+                          <study.icon
+                            className="h-5 w-5 text-primary"
                             strokeWidth={1.5}
                           />
                         </div>
