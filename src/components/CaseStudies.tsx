@@ -94,8 +94,8 @@ export const CaseStudies = () => {
     const onSelect = () => {
       const idx = api.selectedScrollSnap();
       setActiveIndex(idx);
-      // Switching cards should collapse any expanded card.
-      setExpandedId(null);
+      // If details are open, keep them open and swap to the newly-active study.
+      setExpandedId((prev) => (prev ? caseStudies[idx]?.id ?? null : null));
     };
 
     onSelect();
@@ -112,6 +112,9 @@ export const CaseStudies = () => {
     // Only one can be open at a time; clicking same collapses.
     setExpandedId((prev) => (prev === studyId ? null : studyId));
   };
+
+  const activeStudy = caseStudies[activeIndex];
+  const isDetailsOpen = expandedId === activeStudy?.id;
 
   return (
     <section id="case-studies" className="py-32 px-6 bg-muted/30 overflow-x-hidden">
@@ -223,115 +226,6 @@ export const CaseStudies = () => {
                         </button>
                       </div>
 
-                      <AnimatePresence initial={false}>
-                        {isActive && isExpanded && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.25, ease: easePremium }}
-                            className="overflow-hidden"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <div className="px-6 md:px-8 pb-8 pt-0">
-                              <div className="border-t border-border pt-6 space-y-5">
-                                {"link" in study && study.link && (
-                                  <a
-                                    href={study.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
-                                  >
-                                    <ExternalLink
-                                      className="h-4 w-4"
-                                      strokeWidth={1.5}
-                                    />
-                                    View Project
-                                  </a>
-                                )}
-
-                                {"role" in study && study.role && (
-                                  <p className="text-sm text-muted-foreground">
-                                    <span className="font-medium text-foreground">
-                                      Role:
-                                    </span>{" "}
-                                    {study.role}
-                                  </p>
-                                )}
-
-                                {"integrations" in study && study.integrations && (
-                                  <p className="text-sm text-muted-foreground">
-                                    <span className="font-medium text-foreground">
-                                      Integrations:
-                                    </span>{" "}
-                                    {study.integrations}
-                                  </p>
-                                )}
-
-                                {"overview" in study && study.overview && (
-                                  <div>
-                                    <h4 className="text-sm font-medium text-foreground mb-2">
-                                      Overview
-                                    </h4>
-                                    <p className="text-sm text-muted-foreground leading-relaxed">
-                                      {study.overview}
-                                    </p>
-                                  </div>
-                                )}
-
-                                {"problem" in study && study.problem && (
-                                  <div>
-                                    <h4 className="text-sm font-medium text-foreground mb-2">
-                                      Problem
-                                    </h4>
-                                    <p className="text-sm text-muted-foreground leading-relaxed">
-                                      {study.problem}
-                                    </p>
-                                  </div>
-                                )}
-
-                                <div>
-                                  <h4 className="text-sm font-medium text-foreground mb-3">
-                                    {study.type === "Website"
-                                      ? "Work Performed"
-                                      : "Solution"}
-                                  </h4>
-                                  <ul className="space-y-2">
-                                    {study.workPerformed.map((item, i) => (
-                                      <li
-                                        key={i}
-                                        className="text-sm text-muted-foreground flex items-start gap-3 leading-relaxed"
-                                      >
-                                        <span className="text-primary/60 mt-0.5">
-                                          •
-                                        </span>
-                                        {item}
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-
-                                <div className="p-5 rounded-xl bg-accent/30 border border-accent/50">
-                                  <h4 className="text-sm font-medium text-foreground mb-3">
-                                    {study.type === "Website" ? "Result" : "Impact"}
-                                  </h4>
-                                  <ul className="space-y-2">
-                                    {study.results.map((result, i) => (
-                                      <li
-                                        key={i}
-                                        className="text-sm text-muted-foreground flex items-start gap-3 leading-relaxed"
-                                      >
-                                        <span className="text-primary">✓</span>
-                                        {result}
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
                     </div>
                   </motion.div>
                 </CarouselItem>
@@ -339,6 +233,120 @@ export const CaseStudies = () => {
             })}
           </CarouselContent>
         </Carousel>
+
+        <AnimatePresence initial={false}>
+          {isDetailsOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.28, ease: easePremium }}
+              className="overflow-hidden"
+            >
+              <div className="mt-8 bg-card border border-border rounded-2xl shadow-lg overflow-hidden">
+                <div className="p-6 md:p-8">
+                  <div className="flex items-start justify-between gap-6">
+                    <div className="min-w-0">
+                      <p className="text-xs font-medium text-primary uppercase tracking-wide">
+                        {activeStudy.type}
+                      </p>
+                      <h3 className="text-xl md:text-2xl font-heading font-medium text-foreground mt-2 leading-snug">
+                        {activeStudy.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground mt-2">
+                        {activeStudy.platform}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="border-t border-border mt-6 pt-6 space-y-5">
+                    {"link" in activeStudy && activeStudy.link && (
+                      <a
+                        href={activeStudy.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
+                      >
+                        <ExternalLink className="h-4 w-4" strokeWidth={1.5} />
+                        View Project
+                      </a>
+                    )}
+
+                    {"role" in activeStudy && activeStudy.role && (
+                      <p className="text-sm text-muted-foreground">
+                        <span className="font-medium text-foreground">Role:</span>{" "}
+                        {activeStudy.role}
+                      </p>
+                    )}
+
+                    {"integrations" in activeStudy && activeStudy.integrations && (
+                      <p className="text-sm text-muted-foreground">
+                        <span className="font-medium text-foreground">Integrations:</span>{" "}
+                        {activeStudy.integrations}
+                      </p>
+                    )}
+
+                    {"overview" in activeStudy && activeStudy.overview && (
+                      <div>
+                        <h4 className="text-sm font-medium text-foreground mb-2">
+                          Overview
+                        </h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {activeStudy.overview}
+                        </p>
+                      </div>
+                    )}
+
+                    {"problem" in activeStudy && activeStudy.problem && (
+                      <div>
+                        <h4 className="text-sm font-medium text-foreground mb-2">
+                          Problem
+                        </h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {activeStudy.problem}
+                        </p>
+                      </div>
+                    )}
+
+                    <div>
+                      <h4 className="text-sm font-medium text-foreground mb-3">
+                        {activeStudy.type === "Website" ? "Work Performed" : "Solution"}
+                      </h4>
+                      <ul className="space-y-2">
+                        {activeStudy.workPerformed.map((item, i) => (
+                          <li
+                            key={i}
+                            className="text-sm text-muted-foreground flex items-start gap-3 leading-relaxed"
+                          >
+                            <span className="text-primary/60 mt-0.5">•</span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="p-5 rounded-xl bg-accent/30 border border-accent/50">
+                      <h4 className="text-sm font-medium text-foreground mb-3">
+                        {activeStudy.type === "Website" ? "Result" : "Impact"}
+                      </h4>
+                      <ul className="space-y-2">
+                        {activeStudy.results.map((result, i) => (
+                          <li
+                            key={i}
+                            className="text-sm text-muted-foreground flex items-start gap-3 leading-relaxed"
+                          >
+                            <span className="text-primary">✓</span>
+                            {result}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <p className="text-center text-xs text-muted-foreground/60 mt-8 md:hidden">
           Swipe or tap a side card to focus
