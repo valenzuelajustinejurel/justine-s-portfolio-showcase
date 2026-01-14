@@ -236,7 +236,7 @@ export const CaseStudies = () => {
                         className="mt-3 z-30 relative"
                       >
                         <div className="bg-card border border-primary/20 rounded-2xl shadow-xl overflow-hidden">
-                          <div className="px-6 md:px-8 py-6 space-y-5 max-h-[50vh] overflow-y-auto">
+                          <div className="px-6 md:px-8 py-6 space-y-5">
                             {'link' in study && study.link && (
                               <a
                                 href={study.link}
