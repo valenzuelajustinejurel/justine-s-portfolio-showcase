@@ -25,6 +25,19 @@
 
   <body>
     <div id="root"></div>
+    <script>
+      // GitHub Pages SPA fallback: redirect to hash route if no hash present
+      (function() {
+        var path = window.location.pathname;
+        var basePath = '/justine-s-portfolio-showcase/';
+        if (path.startsWith(basePath) && !window.location.hash) {
+          var route = path.slice(basePath.length);
+          if (route && route !== '') {
+            window.location.replace(basePath + '#/' + route);
+          }
+        }
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
