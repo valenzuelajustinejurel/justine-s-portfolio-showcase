@@ -218,7 +218,10 @@ export const CaseStudies = () => {
                             handleExpandToggle(study.id);
                           }}
                           className={
-                            "mt-1 text-sm text-primary/90 hover:text-primary transition-colors" +
+                            "mt-3 px-4 py-2 text-sm font-medium rounded-lg border transition-all duration-200 " +
+                            (isActive && isExpanded
+                              ? "bg-muted text-foreground border-border hover:bg-muted/80"
+                              : "bg-primary text-primary-foreground border-primary hover:bg-primary/90") +
                             (!isActive ? " opacity-70" : "")
                           }
                         >
