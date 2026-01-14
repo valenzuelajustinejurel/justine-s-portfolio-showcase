@@ -12,7 +12,7 @@ export const Hero = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading leading-tight text-foreground mb-6"
         >
-          Virtual Assistant & Automation Specialist
+          Website Manager & Automation Specialist (Tech VA)
         </motion.h1>
 
         <motion.p
@@ -21,8 +21,7 @@ export const Hero = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto mb-10 font-body"
         >
-          I help businesses streamline operations through executive assistance,
-          web development, and intelligent automation solutions.
+          I help organizations manage, improve, and automate their websites and internal workflows.
         </motion.p>
 
         <motion.div
