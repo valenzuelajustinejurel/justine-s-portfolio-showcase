@@ -6,13 +6,13 @@ export const Hero = () => {
     <section className="min-h-[90vh] flex items-center px-6 pt-28 pb-20">
       <div className="max-w-5xl mx-auto w-full">
         {/* Two-column layout: Image + Text */}
-        <div className="grid lg:grid-cols-[auto_1fr] gap-10 lg:gap-16 items-center mb-12">
+        <div className="grid lg:grid-cols-[auto_1fr] gap-10 lg:gap-16 items-center justify-center mb-12">
           {/* Profile Image - Left Column */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="flex justify-center lg:justify-start"
+            className="flex justify-center"
           >
             <div className="relative">
               <div className="w-56 h-64 sm:w-64 sm:h-72 lg:w-72 lg:h-80 rounded-2xl overflow-hidden shadow-xl bg-card border border-border/50">
@@ -32,7 +32,7 @@ export const Hero = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="text-center lg:text-left"
+            className="text-center"
           >
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading font-semibold text-foreground mb-3">
               Justine Valenzuela
@@ -42,7 +42,7 @@ export const Hero = () => {
               Website Manager & Automation Specialist
             </p>
 
-            <p className="text-base md:text-lg text-muted-foreground max-w-md mx-auto lg:mx-0 font-light leading-relaxed">
+            <p className="text-base md:text-lg text-muted-foreground max-w-md mx-auto font-light leading-relaxed">
               I help organizations manage, improve, and automate their websites and internal workflows.
             </p>
           </motion.div>
