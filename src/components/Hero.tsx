@@ -5,8 +5,8 @@ export const Hero = () => {
   return (
     <section className="min-h-[90vh] flex items-center px-6 pt-28 pb-20">
       <div className="max-w-5xl mx-auto w-full">
-        {/* Two-column layout: Image + Text */}
-        <div className="grid lg:grid-cols-[auto_1fr] gap-10 lg:gap-16 items-center justify-center mb-12">
+        {/* Two-column layout: Image + Text with Buttons */}
+        <div className="grid lg:grid-cols-[auto_1fr] gap-10 lg:gap-16 items-center justify-center">
           {/* Profile Image - Left Column */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -27,12 +27,12 @@ export const Hero = () => {
             </div>
           </motion.div>
 
-          {/* Text Content - Right Column */}
+          {/* Text Content + Buttons - Right Column */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="text-center"
+            className="text-center lg:text-left"
           >
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading font-semibold text-foreground mb-3">
               Justine Valenzuela
@@ -42,31 +42,26 @@ export const Hero = () => {
               Website Manager & Automation Specialist
             </p>
 
-            <p className="text-base md:text-lg text-muted-foreground max-w-md mx-auto font-light leading-relaxed">
-              I help organizations manage, improve, and automate their websites and internal workflows.
+            <p className="text-base md:text-lg text-muted-foreground max-w-lg mx-auto lg:mx-0 font-light leading-relaxed mb-10">
+              Helping organizations manage, improve, and automate their websites and internal workflows—so systems stay reliable and teams save time.
             </p>
+
+            {/* Buttons - Under the text content */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <Button asChild size="lg" className="px-8 py-6 text-base font-medium shadow-md hover:shadow-lg transition-shadow">
+                <a href="#contact">Work With Me</a>
+              </Button>
+              <Button 
+                asChild 
+                variant="outline" 
+                size="lg" 
+                className="px-8 py-6 text-base font-normal text-muted-foreground hover:text-foreground border-border/60 hover:border-primary/30"
+              >
+                <a href="#case-studies">View My Work</a>
+              </Button>
+            </div>
           </motion.div>
         </div>
-
-        {/* Buttons - Below Image and Text */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
-        >
-          <Button asChild size="lg" className="px-8 py-6 text-base font-medium shadow-md hover:shadow-lg transition-shadow">
-            <a href="#contact">Work With Me</a>
-          </Button>
-          <Button 
-            asChild 
-            variant="outline" 
-            size="lg" 
-            className="px-8 py-6 text-base font-normal text-muted-foreground hover:text-foreground border-border/60 hover:border-primary/30"
-          >
-            <a href="#case-studies">View My Work</a>
-          </Button>
-        </motion.div>
 
         {/* Scroll indicator */}
         <motion.div
