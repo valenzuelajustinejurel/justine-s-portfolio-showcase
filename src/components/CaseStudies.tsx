@@ -112,7 +112,7 @@ export const CaseStudies = () => {
         {/* Focus Carousel Container */}
         <div 
           ref={containerRef}
-          className="relative flex items-center justify-center gap-4 md:gap-6 lg:gap-8 px-4"
+          className="relative flex items-start justify-center gap-4 md:gap-6 lg:gap-8 px-4"
         >
           {caseStudies.map((study, index) => {
             const isActive = index === activeIndex;
@@ -142,7 +142,7 @@ export const CaseStudies = () => {
               >
                 <div 
                   className={`
-                    bg-card border rounded-2xl overflow-hidden
+                    bg-card border rounded-2xl overflow-visible
                     transition-all duration-300 ease-out
                     ${isActive 
                       ? 'border-primary/20 shadow-xl shadow-primary/5' 
@@ -155,7 +155,7 @@ export const CaseStudies = () => {
                     onClick={(e) => isActive && handleExpandToggle(study.id, e)}
                     className={`
                       p-6 md:p-8 flex flex-col items-start gap-4 text-left
-                      transition-colors duration-200
+                      transition-colors duration-200 rounded-2xl
                       ${isActive ? 'hover:bg-muted/20 cursor-pointer' : 'cursor-pointer'}
                     `}
                   >
@@ -188,97 +188,97 @@ export const CaseStudies = () => {
                       <p className="text-sm text-muted-foreground">{study.platform}</p>
                     </div>
                   </div>
+                </div>
 
-                  {/* Expandable Content - Only for Active Card */}
-                  <AnimatePresence>
-                    {isActive && isExpanded && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: "easeOut" }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-6 md:px-8 pb-8 pt-0">
-                          <div className="border-t border-border pt-6 space-y-5">
-                            {'link' in study && study.link && (
-                              <a
-                                href={study.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={(e) => e.stopPropagation()}
-                                className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
-                              >
-                                <ExternalLink className="h-4 w-4" strokeWidth={1.5} />
-                                View Project
-                              </a>
-                            )}
+                {/* Expandable Content - Positioned Absolutely Below Card */}
+                <AnimatePresence>
+                  {isActive && isExpanded && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.25, ease: "easeOut" }}
+                      className="absolute top-full left-0 right-0 mt-2 z-20"
+                    >
+                      <div className="bg-card border border-primary/20 rounded-2xl shadow-xl shadow-primary/5 overflow-hidden">
+                        <div className="px-6 md:px-8 py-6 space-y-5 max-h-[60vh] overflow-y-auto">
+                          {'link' in study && study.link && (
+                            <a
+                              href={study.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
+                            >
+                              <ExternalLink className="h-4 w-4" strokeWidth={1.5} />
+                              View Project
+                            </a>
+                          )}
 
-                            {'role' in study && study.role && (
-                              <p className="text-sm text-muted-foreground">
-                                <span className="font-medium text-foreground">Role:</span> {study.role}
-                              </p>
-                            )}
+                          {'role' in study && study.role && (
+                            <p className="text-sm text-muted-foreground">
+                              <span className="font-medium text-foreground">Role:</span> {study.role}
+                            </p>
+                          )}
 
-                            {'integrations' in study && study.integrations && (
-                              <p className="text-sm text-muted-foreground">
-                                <span className="font-medium text-foreground">Integrations:</span> {study.integrations}
-                              </p>
-                            )}
+                          {'integrations' in study && study.integrations && (
+                            <p className="text-sm text-muted-foreground">
+                              <span className="font-medium text-foreground">Integrations:</span> {study.integrations}
+                            </p>
+                          )}
 
-                            {'overview' in study && study.overview && (
-                              <div>
-                                <h4 className="text-sm font-medium text-foreground mb-2">Overview</h4>
-                                <p className="text-sm text-muted-foreground leading-relaxed">{study.overview}</p>
-                              </div>
-                            )}
-
-                            {'problem' in study && study.problem && (
-                              <div>
-                                <h4 className="text-sm font-medium text-foreground mb-2">Problem</h4>
-                                <p className="text-sm text-muted-foreground leading-relaxed">{study.problem}</p>
-                              </div>
-                            )}
-
+                          {'overview' in study && study.overview && (
                             <div>
-                              <h4 className="text-sm font-medium text-foreground mb-3">
-                                {study.type === "Website" ? "Work Performed" : "Solution"}
-                              </h4>
-                              <ul className="space-y-2">
-                                {study.workPerformed.map((item, i) => (
-                                  <li
-                                    key={i}
-                                    className="text-sm text-muted-foreground flex items-start gap-3 leading-relaxed"
-                                  >
-                                    <span className="text-primary/60 mt-0.5">•</span>
-                                    {item}
-                                  </li>
-                                ))}
-                              </ul>
+                              <h4 className="text-sm font-medium text-foreground mb-2">Overview</h4>
+                              <p className="text-sm text-muted-foreground leading-relaxed">{study.overview}</p>
                             </div>
+                          )}
 
-                            <div className="p-5 rounded-xl bg-accent/30 border border-accent/50">
-                              <h4 className="text-sm font-medium text-foreground mb-3">
-                                {study.type === "Website" ? "Result" : "Impact"}
-                              </h4>
-                              <ul className="space-y-2">
-                                {study.results.map((result, i) => (
-                                  <li
-                                    key={i}
-                                    className="text-sm text-muted-foreground flex items-start gap-3 leading-relaxed"
-                                  >
-                                    <span className="text-primary">✓</span>
-                                    {result}
-                                  </li>
-                                ))}
-                              </ul>
+                          {'problem' in study && study.problem && (
+                            <div>
+                              <h4 className="text-sm font-medium text-foreground mb-2">Problem</h4>
+                              <p className="text-sm text-muted-foreground leading-relaxed">{study.problem}</p>
                             </div>
+                          )}
+
+                          <div>
+                            <h4 className="text-sm font-medium text-foreground mb-3">
+                              {study.type === "Website" ? "Work Performed" : "Solution"}
+                            </h4>
+                            <ul className="space-y-2">
+                              {study.workPerformed.map((item, i) => (
+                                <li
+                                  key={i}
+                                  className="text-sm text-muted-foreground flex items-start gap-3 leading-relaxed"
+                                >
+                                  <span className="text-primary/60 mt-0.5">•</span>
+                                  {item}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          <div className="p-5 rounded-xl bg-accent/30 border border-accent/50">
+                            <h4 className="text-sm font-medium text-foreground mb-3">
+                              {study.type === "Website" ? "Result" : "Impact"}
+                            </h4>
+                            <ul className="space-y-2">
+                              {study.results.map((result, i) => (
+                                <li
+                                  key={i}
+                                  className="text-sm text-muted-foreground flex items-start gap-3 leading-relaxed"
+                                >
+                                  <span className="text-primary">✓</span>
+                                  {result}
+                                </li>
+                              ))}
+                            </ul>
                           </div>
                         </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 {/* Active Indicator */}
                 {isActive && (
