@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { href: "#services", label: "Services" },
-  { href: "#case-studies", label: "Case Studies" },
-  { href: "#tools", label: "Tools" },
-  { href: "#contact", label: "Contact" },
+  { to: "/services", label: "Services", sectionId: "services" },
+  { to: "/case-studies", label: "Case Studies", sectionId: "case-studies" },
+  { to: "/tools", label: "Tools", sectionId: "tools" },
+  { to: "/contact", label: "Contact", sectionId: "contact" },
 ];
 
 export const Navigation = () => {
@@ -21,6 +22,20 @@ export const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollTo = useCallback((sectionId?: string) => {
+    if (!sectionId) return;
+    const el = document.getElementById(sectionId);
+    el?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
+  const handleNavClick = useCallback(
+    (sectionId?: string) => {
+      setIsMobileMenuOpen(false);
+      scrollTo(sectionId);
+    },
+    [scrollTo]
+  );
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -28,23 +43,33 @@ export const Navigation = () => {
       }`}
     >
       <div className="max-w-5xl mx-auto px-6 py-5 flex items-center justify-between">
-        <a href="#" className="font-heading text-lg text-foreground">
+        <Link
+          to="/"
+          onClick={() => {
+            setIsMobileMenuOpen(false);
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+          }}
+          className="font-heading text-lg text-foreground"
+        >
           Justine Jurel Valenzuela
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
+            <Link
+              key={link.to}
+              to={link.to}
+              onClick={() => handleNavClick(link.sectionId)}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           <Button asChild size="sm" className="ml-2">
-            <a href="#contact">Work With Me</a>
+            <Link to="/contact" onClick={() => handleNavClick("contact")}>
+              Work With Me
+            </Link>
           </Button>
         </div>
 
@@ -67,19 +92,19 @@ export const Navigation = () => {
         <div className="md:hidden bg-background border-b border-border">
           <div className="px-6 py-6 flex flex-col gap-5">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
+              <Link
+                key={link.to}
+                to={link.to}
                 className="text-base text-muted-foreground hover:text-foreground transition-colors duration-200"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => handleNavClick(link.sectionId)}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <Button asChild size="sm" className="w-fit mt-2">
-              <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link to="/contact" onClick={() => handleNavClick("contact")}>
                 Work With Me
-              </a>
+              </Link>
             </Button>
           </div>
         </div>

@@ -16,6 +16,11 @@ const App = () => (
       <HashRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          {/* Home sections (keeps navigation working under HashRouter) */}
+          <Route path="/services" element={<Index />} />
+          <Route path="/case-studies" element={<Index />} />
+          <Route path="/tools" element={<Index />} />
+          <Route path="/contact" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

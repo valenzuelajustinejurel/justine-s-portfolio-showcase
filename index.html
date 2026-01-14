@@ -31,10 +31,8 @@
         var path = window.location.pathname;
         var basePath = '/justine-s-portfolio-showcase/';
         if (path.startsWith(basePath) && !window.location.hash) {
-          var route = path.slice(basePath.length);
-          if (route && route !== '') {
-            window.location.replace(basePath + '#/' + route);
-          }
+          var route = path.slice(basePath.length).replace(/^\/+/, '');
+          window.location.replace(basePath + '#/' + route);
         }
       })();
     </script>

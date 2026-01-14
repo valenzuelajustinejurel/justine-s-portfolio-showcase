@@ -10,13 +10,9 @@
       var basePath = '/justine-s-portfolio-showcase/';
       var path = window.location.pathname;
       var search = window.location.search;
-      
+
       // Remove base path and redirect to hash route
-      var route = path.replace(basePath, '');
-      if (route === '' || route === '/') {
-        route = '';
-      }
-      
+      var route = path.replace(basePath, '').replace(/^\/+/, '');
       window.location.replace(basePath + '#/' + route + search);
     </script>
   </head>

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 export const Hero = () => {
@@ -49,15 +50,15 @@ export const Hero = () => {
             {/* Buttons - Under the text content */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button asChild size="lg" className="px-8 py-6 text-base font-medium shadow-md hover:shadow-lg transition-shadow">
-                <a href="#contact">Work With Me</a>
+                <Link to="/contact">Work With Me</Link>
               </Button>
-              <Button 
-                asChild 
-                variant="outline" 
-                size="lg" 
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
                 className="px-8 py-6 text-base font-normal text-muted-foreground hover:text-foreground border-border/60 hover:border-primary/30"
               >
-                <a href="#case-studies">View My Work</a>
+                <Link to="/case-studies">View My Work</Link>
               </Button>
             </div>
           </motion.div>
@@ -70,25 +71,25 @@ export const Hero = () => {
           transition={{ duration: 0.7, delay: 0.9 }}
           className="flex justify-center mt-20 lg:mt-24"
         >
-          <a
-            href="#services"
+          <Link
+            to="/services"
             className="text-muted-foreground/50 hover:text-muted-foreground transition-colors duration-300"
             aria-label="Scroll to services"
           >
-            <svg 
-              width="24" 
-              height="24" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="1.5" 
-              strokeLinecap="round" 
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
               strokeLinejoin="round"
               className="animate-pulse"
             >
               <path d="M12 5v14M19 12l-7 7-7-7" />
             </svg>
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>
