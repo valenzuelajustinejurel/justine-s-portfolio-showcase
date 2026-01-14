@@ -1,49 +1,74 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Globe, Zap } from "lucide-react";
+import { ChevronDown, Globe, Zap, ExternalLink } from "lucide-react";
 
 const caseStudies = [
   {
     id: 1,
     type: "Website",
     icon: Globe,
-    title: "E-commerce Store Redesign",
-    summary: "Complete website overhaul resulting in 40% increase in conversions",
-    details: [
-      "Redesigned the entire user interface for better navigation",
-      "Implemented responsive design for mobile-first experience",
-      "Integrated payment gateway and inventory management",
-      "Set up analytics tracking and conversion optimization",
+    title: "Helen's Project – Website Revamp & Management",
+    link: "https://www.helensproject.org/",
+    role: "Website Manager & Web Support",
+    platform: "Squarespace + Custom Code",
+    overview: "Helen's Project is a mental health organization with a large, content-heavy website. I was responsible for revamping the site and providing ongoing website management and updates.",
+    workPerformed: [
+      "Revamped the entire website design across all pages",
+      "Updated color palettes, typography, and layout structure",
+      "Improved visual consistency and readability",
+      "Implemented a custom provider search feature using custom code",
+      "Managed and updated a large multi-page website (not limited to 5 pages)",
+      "Regularly updated content for events, providers, and new pages",
     ],
-    result: "40% increase in conversion rate within 3 months",
+    results: [
+      "Improved site consistency and usability",
+      "Easier navigation for users searching for providers",
+      "Faster turnaround for content and event updates",
+    ],
   },
   {
     id: 2,
     type: "Automation",
     icon: Zap,
-    title: "Lead Management System",
-    summary: "Automated lead capture and nurturing workflow saving 15+ hours weekly",
-    details: [
-      "Built Zapier automation connecting forms to CRM",
-      "Created automated email sequences for lead nurturing",
-      "Set up Slack notifications for high-priority leads",
-      "Integrated with Google Sheets for reporting",
+    title: "Automated Asana Task Reminder System",
+    platform: "n8n (Self-hosted on VPS)",
+    integrations: "Asana, Slack",
+    problem: "Tasks were being missed because there was no consistent reminder system tied to due dates.",
+    workPerformed: [
+      "Built a scheduled automation that checks Asana daily",
+      "Filters incomplete tasks with valid due dates",
+      "Categorizes tasks by urgency (today, 1–3 days out)",
+      "Sends a structured Slack digest with threaded task details",
+      "Mentions assignees automatically",
+      "Suppresses notifications when no tasks are due",
     ],
-    result: "15+ hours saved per week, 2x lead response time improvement",
+    results: [
+      "Reduced manual task checking",
+      "Improved deadline visibility",
+      "Increased accountability",
+    ],
   },
   {
     id: 3,
     type: "Automation",
     icon: Zap,
-    title: "Invoice & Payment Automation",
-    summary: "End-to-end invoicing system reducing payment delays by 60%",
-    details: [
-      "Automated invoice generation from project management tool",
-      "Set up payment reminders and follow-up sequences",
-      "Integrated with accounting software for reconciliation",
-      "Created dashboard for tracking outstanding payments",
+    title: "Slack-to-Asana IT Ticket Intake System",
+    platform: "n8n (Self-hosted on VPS)",
+    integrations: "Slack, Asana, Google Sheets",
+    problem: "IT requests were submitted informally in Slack, causing missed issues and poor tracking.",
+    workPerformed: [
+      "Built an automated Slack intake system",
+      "Parsed structured Slack message blocks",
+      "Created IT tickets automatically in Asana",
+      "Mapped urgency levels to Asana custom fields",
+      "Logged all tickets in Google Sheets",
+      "Sent confirmation messages back to requesters",
     ],
-    result: "60% reduction in payment delays, streamlined bookkeeping",
+    results: [
+      "Centralized IT request handling",
+      "Reduced manual coordination",
+      "Improved tracking and accountability",
+    ],
   },
 ];
 
@@ -58,12 +83,12 @@ export const CaseStudies = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-heading text-foreground mb-4">
             Case Studies
           </h2>
-          <p className="text-muted-foreground max-w-lg mx-auto">
+          <p className="text-muted-foreground max-w-lg">
             Real projects with measurable results. Click to see more details.
           </p>
         </motion.div>
@@ -96,10 +121,10 @@ export const CaseStudies = () => {
                   <h3 className="text-lg font-heading text-foreground mb-1">
                     {study.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground">{study.summary}</p>
+                  <p className="text-sm text-muted-foreground">{study.platform}</p>
                 </div>
                 <ChevronDown
-                  className={`h-5 w-5 text-muted-foreground transition-transform duration-200 ${
+                  className={`h-5 w-5 text-muted-foreground transition-transform duration-200 flex-shrink-0 ${
                     expandedId === study.id ? "rotate-180" : ""
                   }`}
                 />
@@ -115,30 +140,84 @@ export const CaseStudies = () => {
                     className="overflow-hidden"
                   >
                     <div className="px-6 pb-6 pt-0">
-                      <div className="border-t border-border pt-4">
-                        <h4 className="text-sm font-medium text-foreground mb-3">
-                          What I did:
-                        </h4>
-                        <ul className="space-y-2 mb-4">
-                          {study.details.map((detail, i) => (
-                            <li
-                              key={i}
-                              className="text-sm text-muted-foreground flex items-start gap-2"
-                            >
-                              <span className="text-primary mt-1.5">•</span>
-                              {detail}
-                            </li>
-                          ))}
-                        </ul>
-                        <div className="p-3 rounded-md bg-accent/50">
-                          <p className="text-sm">
-                            <span className="font-medium text-foreground">
-                              Result:
-                            </span>{" "}
-                            <span className="text-muted-foreground">
-                              {study.result}
-                            </span>
+                      <div className="border-t border-border pt-4 space-y-4">
+                        {/* Link (for website case study) */}
+                        {'link' in study && study.link && (
+                          <a
+                            href={study.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                            {study.link}
+                          </a>
+                        )}
+
+                        {/* Role (for website case study) */}
+                        {'role' in study && study.role && (
+                          <p className="text-sm text-muted-foreground">
+                            <span className="font-medium text-foreground">Role:</span> {study.role}
                           </p>
+                        )}
+
+                        {/* Integrations (for automation case studies) */}
+                        {'integrations' in study && study.integrations && (
+                          <p className="text-sm text-muted-foreground">
+                            <span className="font-medium text-foreground">Integrations:</span> {study.integrations}
+                          </p>
+                        )}
+
+                        {/* Overview (for website case study) */}
+                        {'overview' in study && study.overview && (
+                          <div>
+                            <h4 className="text-sm font-medium text-foreground mb-2">Overview</h4>
+                            <p className="text-sm text-muted-foreground">{study.overview}</p>
+                          </div>
+                        )}
+
+                        {/* Problem (for automation case studies) */}
+                        {'problem' in study && study.problem && (
+                          <div>
+                            <h4 className="text-sm font-medium text-foreground mb-2">Problem</h4>
+                            <p className="text-sm text-muted-foreground">{study.problem}</p>
+                          </div>
+                        )}
+
+                        {/* Work Performed */}
+                        <div>
+                          <h4 className="text-sm font-medium text-foreground mb-2">
+                            {study.type === "Website" ? "Work Performed" : "Solution"}
+                          </h4>
+                          <ul className="space-y-1.5">
+                            {study.workPerformed.map((item, i) => (
+                              <li
+                                key={i}
+                                className="text-sm text-muted-foreground flex items-start gap-2"
+                              >
+                                <span className="text-primary mt-1">•</span>
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* Results */}
+                        <div className="p-4 rounded-md bg-accent/50">
+                          <h4 className="text-sm font-medium text-foreground mb-2">
+                            {study.type === "Website" ? "Result" : "Impact"}
+                          </h4>
+                          <ul className="space-y-1">
+                            {study.results.map((result, i) => (
+                              <li
+                                key={i}
+                                className="text-sm text-muted-foreground flex items-start gap-2"
+                              >
+                                <span className="text-primary">✓</span>
+                                {result}
+                              </li>
+                            ))}
+                          </ul>
                         </div>
                       </div>
                     </div>
