@@ -53,7 +53,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+          className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <Button asChild size="lg" className="px-8 py-6 text-base font-medium shadow-md hover:shadow-lg transition-shadow">
             <a href="#contact">Work With Me</a>
